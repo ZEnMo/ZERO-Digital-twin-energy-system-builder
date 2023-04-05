@@ -192,6 +192,8 @@ gr_heatDemandLegenda.setVisible(false);
 ra_legendaOptions.setValue(0,true);
 
 
+
+f_initializeAgentPopulations();
 ]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -826,6 +828,462 @@ ra_legendaOptions.setValue(0,true);
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1680691276943</Id>
+					<Name><![CDATA[dt_h_rapid]]></Name>
+					<X>-950</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450115</Id>
+					<Name><![CDATA[p_aantal_inwoners]]></Name>
+					<X>-960</X><Y>130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450113</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450120</Id>
+					<Name><![CDATA[p_aantal_autos]]></Name>
+					<X>-960</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450118</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450126</Id>
+					<Name><![CDATA[p_aansl_aardgas]]></Name>
+					<X>-961</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450124</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450131</Id>
+					<Name><![CDATA[p_aansl_HTnet]]></Name>
+					<X>-961</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450129</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450136</Id>
+					<Name><![CDATA[p_perc_woningcorporaties]]></Name>
+					<X>-960</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450134</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450140</Id>
+					<Name><![CDATA[p_energyDensityGas_kWhpm3]]></Name>
+					<Description><![CDATA[kWh/m3]]></Description>
+					<X>-1030</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[9.769]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450138</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450145</Id>
+					<Name><![CDATA[p_sampleCarSize]]></Name>
+					<X>-350</X><Y>760</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[100]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450143</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450149</Id>
+					<Name><![CDATA[p_EVChargingType]]></Name>
+					<X>-1030</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[String]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA["conventional"]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450147</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450153</Id>
+					<Name><![CDATA[p_annualEnergyDemandElectricCooking_kWh]]></Name>
+					<X>-1260</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[175]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450151</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450157</Id>
+					<Name><![CDATA[p_annualEnergyDemandGasCooking_m3]]></Name>
+					<X>-1260</X><Y>320</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[37]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450155</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450160</Id>
+					<Name><![CDATA[p_homeBatteryChargeAlgorithm]]></Name>
+					<X>-1030</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[String]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA["Household optimization"]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450158</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450164</Id>
+					<Name><![CDATA[p_annualAverageKMAlbatross]]></Name>
+					<X>-1260</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[7528.7039]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450162</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450167</Id>
+					<Name><![CDATA[p_efficiencyICECar_lperkm]]></Name>
+					<X>-1260</X><Y>360</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.0765 // l per km]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450165</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450170</Id>
+					<Name><![CDATA[p_benzine_ltokWh]]></Name>
+					<X>-1260</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[8.9]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450168</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450174</Id>
+					<Name><![CDATA[p_chargingType]]></Name>
+					<X>-1030</X><Y>360</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[String]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680691450172</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450178</Id>
+					<Name><![CDATA[p_kWConnectionCapacityPerHousehold]]></Name>
+					<Description><![CDATA[See email Wouter Alliander]]></Description>
+					<X>-1260</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1.5]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450176</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450182</Id>
+					<Name><![CDATA[p_isPublicVersion]]></Name>
+					<X>-1260</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450180</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450186</Id>
+					<Name><![CDATA[p_simultaneityFactor100Households]]></Name>
+					<Description><![CDATA[source: https://phasetophase.nl/boek/boek_3_13.html]]></Description>
+					<X>-1260</X><Y>400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.46]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450184</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680691450190</Id>
+					<Name><![CDATA[p_maxPowerHousehold_kW]]></Name>
+					<X>-1260</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[2.6]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1680691450188</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1680504846338</Id>
 					<Name><![CDATA[householdsInBuilding]]></Name>
@@ -939,6 +1397,83 @@ else if (ra_legendaOptions.getValue() == 1){
 
 ]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680691395074</Id>
+					<Name><![CDATA[f_initializeAgentPopulations]]></Name>
+					<X>-650</X><Y>760</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[
+
+for (int i = 0; i < p_sampleCarSize; i++){
+	add_pop_EA_SampleCarPatterns();
+}
+f_generateHouseholds();]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680691521446</Id>
+					<Name><![CDATA[f_generateHouseholds]]></Name>
+					<X>-640</X><Y>780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Get trip tuples from this household ID from database
+List<Tuple> rows = selectFrom(residence_objects)
+	.list();
+
+for (Tuple row : rows) {
+	if (row.get( residence_objects.gebruiksdo ).equals( "woonfunctie")){
+		EA_Household h = add_pop_EA_Households();
+		h.householdID = row.get( residence_objects.identifica );
+		h.energieLabel = row.get( residence_objects.energieklasse );
+		h.energieIndex = row.get( residence_objects.energie_index );
+		h.energieIndexEMG = row.get( residence_objects.energie_index_emg_forfaitair );
+		h.buildingTypeString = row.get( residence_objects.gebouwtype ); 
+		h.buildingSubType = row.get( residence_objects.gebouwsubtype );
+		h.p_floorSurfaceArea = row.get( residence_objects.oppervlakt );
+		h.status = row.get( residence_objects.status );
+		h.gebruiksdo = row.get( residence_objects.gebruiksdo );
+		h.openbareR = row.get( residence_objects.openbare_r );
+		h.huisnummer = row.get( residence_objects.huisnummer );
+		h.huisletter = row.get( residence_objects.huisletter );
+		h.toevoeging = row.get( residence_objects.toevoeging );
+		h.postcode = row.get( residence_objects.postcode );
+		h.woonplaats = row.get( residence_objects.woonplaats );
+		h.bouwjaar = row.get( residence_objects.bouwjaar );
+		h.pandidenti = row.get( residence_objects.pandidenti );
+		h.pandstatus = row.get( residence_objects.pandstatus );
+		h.rdfSeeals = row.get( residence_objects.rdf_seeals );
+		h.xcoord = row.get( residence_objects.xcoord );
+		h.ycoord = row.get( residence_objects.ycoord );
+		//h.row.get( neighbhorhood_residence_objects.woningtype );
+	}
+}
+
+//set location
+for (EA_Household h : pop_EA_Households){
+	h.setLatLon(h.ycoord, h.xcoord);
+	/*
+	h.f_setOLHouseType();
+	h.f_findGisRegion(p_selectedNeighborhoodName);
+	h.f_setEnergyLabel(h.energieLabel);
+	h.p_energyLabelValueBase = h.p_energyLabelValue;
+	h.p_energyLabelOLValueBase = h.p_energyLabelOLValue;
+	h.f_setEnergyLabelVestaMAISBase();
+	h.f_setAnnualEnergyDemand();
+	h.f_setDefaultAnnualEnergyDemand();
+	h.f_setLocationForHeatGrid();
+	*/
+}
+
+]]></Body>
+				</Function>
 			</Functions>
 			<CustomDistributions>
 				<CustomDistribution>
@@ -953,7 +1488,7 @@ else if (ra_legendaOptions.getValue() == 1){
 					<Type>OPTIONS</Type>
 					<DefinitionType>PDF</DefinitionType>
 					<Static>false</Static>
-					<LoadFromDatabase><![CDATA[true]]></LoadFromDatabase>
+					<LoadFromDatabase><![CDATA[false]]></LoadFromDatabase>
 					<RangesQuery>
 					<TableReference>
 						<PackageName><![CDATA[bsd_model2]]></PackageName>
@@ -1112,8 +1647,88 @@ else if (ra_legendaOptions.getValue() == 1){
 			<Connectivity>
 				<ExcelFile>
 					<Id>1680525141705</Id>
-					<Name><![CDATA[carTripsDatabase]]></Name>
+					<Name><![CDATA[ex_carTripsDatabase]]></Name>
 					<X>-650</X><Y>470</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ResourceReference>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
+					</ResourceReference>
+					<SaveInSnapshot>false</SaveInSnapshot>
+					<LoadOnStartup>true</LoadOnStartup>
+					<SaveOnDispose>false</SaveOnDispose>
+				</ExcelFile>
+				<ExcelFile>
+					<Id>1680691759399</Id>
+					<Name><![CDATA[ex_residenceObjectsDatabase]]></Name>
+					<X>-650</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ResourceReference>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[_residenceObjects.xlsx]]></ClassName>
+					</ResourceReference>
+					<SaveInSnapshot>false</SaveInSnapshot>
+					<LoadOnStartup>true</LoadOnStartup>
+					<SaveOnDispose>false</SaveOnDispose>
+				</ExcelFile>
+				<ExcelFile>
+					<Id>1680709942397</Id>
+					<Name><![CDATA[ex_buildingsDatabase]]></Name>
+					<X>-650</X><Y>530</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ResourceReference>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
+					</ResourceReference>
+					<SaveInSnapshot>false</SaveInSnapshot>
+					<LoadOnStartup>true</LoadOnStartup>
+					<SaveOnDispose>false</SaveOnDispose>
+				</ExcelFile>
+				<ExcelFile>
+					<Id>1680710010307</Id>
+					<Name><![CDATA[ex_mslsTransformersDatabase]]></Name>
+					<X>-650</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ResourceReference>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
+					</ResourceReference>
+					<SaveInSnapshot>false</SaveInSnapshot>
+					<LoadOnStartup>true</LoadOnStartup>
+					<SaveOnDispose>false</SaveOnDispose>
+				</ExcelFile>
+				<ExcelFile>
+					<Id>1680710038586</Id>
+					<Name><![CDATA[ex_hsmsTransformersDatabase]]></Name>
+					<X>-650</X><Y>590</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ResourceReference>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
+					</ResourceReference>
+					<SaveInSnapshot>false</SaveInSnapshot>
+					<LoadOnStartup>true</LoadOnStartup>
+					<SaveOnDispose>false</SaveOnDispose>
+				</ExcelFile>
+				<ExcelFile>
+					<Id>1680710062982</Id>
+					<Name><![CDATA[ex_hsmsTransformersDatabase1]]></Name>
+					<X>-650</X><Y>620</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1632,7 +2247,7 @@ else if (ra_legendaOptions.getValue() == 1){
 							<Name><![CDATA[ycoord]]></Name>
 						</Parameter>
 					</Parameters>
-					<ReplicationFlag>false</ReplicationFlag>
+					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
 						<Code><![CDATA[100]]></Code>
 					</Replication>
@@ -1663,7 +2278,7 @@ else if (ra_legendaOptions.getValue() == 1){
 					<LocationNameCode Class="CodeValue">
 						<Code><![CDATA[""]]></Code>
 					</LocationNameCode>
-					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationType>EMPTY</InitializationType>
 					<InitializationDatabaseTableQuery>
 						<TableReference>
 						</TableReference>
@@ -1736,7 +2351,466 @@ else if (ra_legendaOptions.getValue() == 1){
 							<Name><![CDATA[ycoord]]></Name>
 						</Parameter>
 					</Parameters>
-					<ReplicationFlag>false</ReplicationFlag>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1680690884859</Id>
+					<Name><![CDATA[pop_EA_TransformerMSLS]]></Name>
+					<X>-650</X><Y>220</Y>
+					<Label><X>16</X><Y>-2</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1680690886875</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[EA_TransformerMSLS]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[zero_energy_system]]></PackageName>
+							<ClassName><![CDATA[EA_TransformerMSLS]]></ClassName>
+							<ItemName><![CDATA[1680524817000]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[currentStatus]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[validFrom]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[type]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[xcoord]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[ycoord]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[ratedPower]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[id]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1680690942436</Id>
+					<Name><![CDATA[pop_EA_TransformerHSMS]]></Name>
+					<X>-650</X><Y>240</Y>
+					<Label><X>16</X><Y>-2</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1680690944582</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[EA_TransformerHSMS]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[zero_energy_system]]></PackageName>
+							<ClassName><![CDATA[EA_TransformerHSMS]]></ClassName>
+							<ItemName><![CDATA[1680524742042]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[id]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[station]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[plaats]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[netvlak]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[type]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[voorzieningsgebied]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[totaleCapaciteitAfnameMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[totaleCapaciteitInvoedingMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitAfnameHuidigMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitAfname3JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitAfname5JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitAfname10JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitInvoedingHuidigMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitInvoeding3JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitInvoeding5JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[beschikbareCapaciteitInvoeding10JaarMva]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[investeringsplanningTijdAfname]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[investeringsplanningTijdInvoeding]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[investeringsplanningVermogenAfname]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[investeringsplanningVermogenInvoeding]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[netbeheerder]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[peildatum]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[status]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[verwachtJaarVanOverbelastingAfnameMax2050]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[verwachtJaarVanOverbelastingInvoedingMax2050]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[inbedrijfname]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gisRegionDatabase]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[longtitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[latitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gisRegion]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[maxLoadCapacity]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[maxReturnCapacity]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1680691033788</Id>
+					<Name><![CDATA[pop_GZ_RESRegion]]></Name>
+					<X>-650</X><Y>290</Y>
+					<Label><X>16</X><Y>-2</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[GZ_RESRegion]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[zero_energy_system]]></PackageName>
+							<ClassName><![CDATA[GZ_RESRegion]]></ClassName>
+							<ItemName><![CDATA[1680523811742]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[statcode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[jrstatcode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[statnaam]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[rubriek]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gisRegion]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1680691059638</Id>
+					<Name><![CDATA[pop_GZ_Municipality]]></Name>
+					<X>-650</X><Y>310</Y>
+					<Label><X>16</X><Y>-2</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[GZ_Municipality]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[zero_energy_system]]></PackageName>
+							<ClassName><![CDATA[GZ_Municipality]]></ClassName>
+							<ItemName><![CDATA[1680523153755]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[gemeentecode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemeentenaam]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[inwoners]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[huishoudens]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[woningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[bedrijfsvestigingen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[totaalOppervlakte]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[landOppervlakteM2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[waterOppervlakteM2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[longitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[installatiesGrootVermogenOpVeld]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[opgesteldVermogenGrootVermogenOpVeld]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[installatiesGrootVermogenOpDak]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[opgesteldVermogenGrootVermogenOpDak]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aardgasIndustrieTotaalm3]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[elektriciteitIndustrieTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aardgasLandEnTuinbouwTotaalm3]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[elektriciteitLandEnTuinbouwTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aardgasIndustrieTotaalMWh]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aardgasLandEnTuinbouwTotaalMWh]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[latitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HSMSTrafo1]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HSMSTrafo2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HSMSTrafo3]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HSMSTrafo4]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[opgesteldVermogenGrootVermogenOpVeldPerTrafo]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[opgesteldVermogenGrootVermogenOpDakPerTrafo]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
 						<Code><![CDATA[100]]></Code>
 					</Replication>
@@ -1768,6 +2842,470 @@ else if (ra_legendaOptions.getValue() == 1){
 						<Code><![CDATA[""]]></Code>
 					</LocationNameCode>
 					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1680691083171</Id>
+					<Name><![CDATA[pop_GZ_Neighborhood]]></Name>
+					<X>-650</X><Y>330</Y>
+					<Label><X>16</X><Y>-2</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1680691085768</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[GZ_Neighborhood]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[zero_energy_system]]></PackageName>
+							<ClassName><![CDATA[GZ_Neighborhood]]></ClassName>
+							<ItemName><![CDATA[1680523263109]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[buurtcode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[buurtnaam]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[wijkcode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemeentecode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemeentenaam]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energieregio]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[longDb]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[lat]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[water]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[meestVoorkomendePostcode]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[bevolkingsdichtheidInwonersPerKm2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalInwoners]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[mannen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[vrouwen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalHuishoudens]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageEenpersoonshuishoudens]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageHuishoudensZonderKinderen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageHuishoudensMetKinderen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldeHuishoudsgrootte]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenLandbouwBosbouwVisserij]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenNijverheidEnergie]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenHandelEnHoreca]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenVervoerInformatieCommunicatie]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenFinancieelOnroerendGoed]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenZakelijkeDienstverlening]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijvenCultuurRecreatieOverige]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalBedrijfsvestigingen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[woningvoorraad]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldeWoningwaarde]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageEengezinswoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageMeergezinswoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageBewoond]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageKoopwoningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageHuurwoningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percHuurwoningenInBezitWoningcorporaties]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percHuurwoningenInBezitOverigeVerhuurders]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageWoningenMetEigendomOnbekend]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageLeegstandWoningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikAppartement]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikTussenwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikHoekwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikVrijstaandeWoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikHuurwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldGasverbruikkoopwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikAppartement]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikTussenwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikHoekwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemElektriciteitsverbruikVrijstaandeWoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikHuurwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gemiddeldElektriciteitsverbruikkoopwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[nettoArbeidsparticipatie]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[personenautosTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[personenautosPerHuishouden]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[personenautosPerKm2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[motortweewielersTotaal]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalPersonenautosMetBrandstofBenzine]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalPersonenautosMetOverigeBrandstof]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[oppervlakteTotaalInHa]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[oppervlakteLandInHa]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[oppervlakteWaterInHa]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gisRegion]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[gisRegion2]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalElektrischeWarmtePompen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalAansluitingenMTNet]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalAansluitingenLTNet]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalHybrideWarmtePompen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalHRKetelsGroenGas]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[CO2Emissies]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[isBuurtUitgeslotenStartAnalyse]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalWoningEquivalenten]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalAansluitingenAardgas]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[zonOpDakKleinschalig]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energievraagWarmTapwater]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energievraagVentilatie]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energievraagKoude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energievraagApparatenEnLicht]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[totaleEnergievraag]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[energievraagRuimteverwarming]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[zonGrootschalig]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalWoningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalUtiliteitsgebouwen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[totaalAantalAansluitingen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HRBoilerEfficiency]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[householdSpaceHeatingDemand2019]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[utilityBuildingSpaceHeatingDemand2019]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[householdDHWDemand2019]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[utilityBuildingDHWDemand2019]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[aantalWoningEquivalentenUtiliteit]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[percentageWoningEquivalentenUtiliteit]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[hybridHeatPumpCOPThreshold]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[MTDistrictHeatingGridEfficiency]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[LTDistrictHeatingGridEfficiency]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[strategie]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseElektrischeWarmtePompen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseAansluitingenMTNet]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseAansluitingenLTNet]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseHybrideWarmtePompen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseHRKetelsGroenGas]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_baseAansluitingenAardgas]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_averageAreaHousehold]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelA]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelB]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelC]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelD]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelE]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelF]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelG]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalWoningenMetLabel]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelA]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelB]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelC]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelD]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelE]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelF]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalEnergielabelG]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigA]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigB]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigC]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigD]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigE]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigF]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_percentageEnergielabelVoorlopigG]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_aantalZonderLabel]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_woningtype2Onder1]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_woningtypeAppartement]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_woningtypeTussenwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_woningtypeHoekwoning]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_woningtypeVrijstaand]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_totaalWoningen]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_stedelijkheid]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[HSMSTrafo]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[CO2EmissiesStartJaar]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
 					<InitializationDatabaseTableQuery>
 						<TableReference>
 						</TableReference>
@@ -4732,6 +6270,63 @@ rectangle_electricitySettings.setVisible(false);]]></OnClickCode>
 				<EmbeddedObjectPresentation>
 					<Id>1680522981673</Id>
 					<Name><![CDATA[pop_EA_MTHeatSources_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>52.090218545205076</Latitude>
+					<Longitude>5.120986273739995</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1680690886875</Id>
+					<Name><![CDATA[pop_EA_TransformerMSLS_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>52.090218545205076</Latitude>
+					<Longitude>5.120986273739995</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1680690944582</Id>
+					<Name><![CDATA[pop_EA_TransformerHSMS_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>52.090218545205076</Latitude>
+					<Longitude>5.120986273739995</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1680691085768</Id>
+					<Name><![CDATA[pop_GZ_Neighborhood_presentation]]></Name>
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -10439,13 +12034,13 @@ tp_soc.updateData();
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*
+					<Body><![CDATA[
 for (int i=0; i<7*24; i++){
-	c_timeTillNextTrip_hours.add(main.carTripsDatabase.getCellNumericValue("trippattern", i+2, this.getIndex() * 2 + 2));
-	c_distanceDriven_km.add(main.carTripsDatabase.getCellNumericValue("trippattern", i+2, this.getIndex()* 2 + 3));
+	c_timeTillNextTrip_hours.add(main.ex_carTripsDatabase.getCellNumericValue("trippattern", i+2, this.getIndex() * 2 + 2));
+	c_distanceDriven_km.add(main.ex_carTripsDatabase.getCellNumericValue("trippattern", i+2, this.getIndex()* 2 + 3));
 }	
 
-*/
+
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -10458,7 +12053,7 @@ for (int i=0; i<7*24; i++){
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*
+					<Body><![CDATA[
 //Set time
 if (v_hourOfWeek == (24*7)){
 	v_hourOfWeek = 0;
@@ -10487,7 +12082,7 @@ if (c_connectedEVs != null){
 }
 
 v_hourOfWeek++;
-*/]]></Body>
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -12596,6 +14191,21 @@ opgesteldVermogenGrootVermogenOpDakPerTrafo = opgesteldVermogenGrootVermogenOpDa
 				</AgentLink>
 			</AgentLinks>
 
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1680691061671</Id>
+					<Name><![CDATA[main]]></Name>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
 
 			<Presentation>
 				<Level>
@@ -18436,6 +20046,21 @@ maxElectricityDemand_MW = maxElectricityDemand_MW;
 				</AgentLink>
 			</AgentLinks>
 
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1680691085775</Id>
+					<Name><![CDATA[main]]></Name>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
 
 			<Presentation>
 				<Level>
@@ -19729,7 +21354,7 @@ maxElectricityDemand_MW = maxElectricityDemand_MW;
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[Neighborhood]]></Type>
+						<Type><![CDATA[GZ_Neighborhood]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<ParameterEditor>
@@ -20366,6 +21991,21 @@ maxElectricityDemand_MW = maxElectricityDemand_MW;
 				</AgentLink>
 			</AgentLinks>
 
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1680691036727</Id>
+					<Name><![CDATA[main]]></Name>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
 
 			<Presentation>
 				<Level>
@@ -22784,6 +24424,21 @@ else {
 				</AgentLink>
 			</AgentLinks>
 
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1680690944588</Id>
+					<Name><![CDATA[main]]></Name>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
 
 			<Presentation>
 				<Level>
@@ -24003,6 +25658,21 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 				</AgentLink>
 			</AgentLinks>
 
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1680690886887</Id>
+					<Name><![CDATA[main]]></Name>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[zero_energy_system]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
 
 			<Presentation>
 				<Level>
@@ -24078,6 +25748,36 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 		<AutoExport>false</AutoExport>
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
+			<ExternalConnection>
+				<Id>1680711623109</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[_residenceObjects.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[residence_objects]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>0</ConnectionIndex>
+				<ExternalTableName><![CDATA["residence_objects"]]></ExternalTableName>
+				<AutoImport>true</AutoImport>
+			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
 		</ExportSettings>
@@ -24147,6 +25847,63 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 			</Presentation>
 
 			<Parameters>			
+				<Parameter>
+					<ParameterName><![CDATA[p_aantal_inwoners]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_aantal_autos]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_aansl_aardgas]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_aansl_HTnet]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_perc_woningcorporaties]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_energyDensityGas_kWhpm3]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_sampleCarSize]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_EVChargingType]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_annualEnergyDemandElectricCooking_kWh]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_annualEnergyDemandGasCooking_m3]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_homeBatteryChargeAlgorithm]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_annualAverageKMAlbatross]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_efficiencyICECar_lperkm]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_benzine_ltokWh]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_chargingType]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_kWConnectionCapacityPerHousehold]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_isPublicVersion]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_simultaneityFactor100Households]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxPowerHousehold_kW]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -24195,16 +25952,14 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 			<Path><![CDATA[_weeklyTripPattern.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
+		<Resource>
+			<Path><![CDATA[_residenceObjects.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
 	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
 		<VersionMajor>1</VersionMajor>
-		<VersionMinor>0</VersionMinor>
-		<VersionBuild>0</VersionBuild>
-    </RequiredLibraryReference>
-    <RequiredLibraryReference>
-		<LibraryName><![CDATA[zenmo_brabant_energiesysteem]]></LibraryName>
-		<VersionMajor>0</VersionMajor>
 		<VersionMinor>0</VersionMinor>
 		<VersionBuild>0</VersionBuild>
     </RequiredLibraryReference>
