@@ -1335,6 +1335,36 @@ f_initializeAgentPopulations();
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1680715645543</Id>
+					<Name><![CDATA[c_buildingIDs]]></Name>
+					<X>-350</X><Y>780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Double]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1680715949964</Id>
+					<Name><![CDATA[c_buildingGISRegions]]></Name>
+					<X>-350</X><Y>800</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[GISRegion]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -1342,7 +1372,7 @@ f_initializeAgentPopulations();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1680256822865</Id>
 					<Name><![CDATA[f_setHeatingSliders]]></Name>
-					<X>-600</X><Y>-120</Y>
+					<X>-850</X><Y>770</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1351,17 +1381,6 @@ f_initializeAgentPopulations();
 						<Name><![CDATA[sliderIndex]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1680511467585</Id>
-					<Name><![CDATA[f_resetSettings]]></Name>
-					<X>-600</X><Y>-100</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1402,24 +1421,24 @@ else if (ra_legendaOptions.getValue() == 1){
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1680691395074</Id>
 					<Name><![CDATA[f_initializeAgentPopulations]]></Name>
-					<X>-650</X><Y>760</Y>
+					<X>-650</X><Y>740</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[
-
-for (int i = 0; i < p_sampleCarSize; i++){
-	add_pop_EA_SampleCarPatterns();
-}
-f_generateHouseholds();]]></Body>
+					<Body><![CDATA[//Detailed neighborhood
+f_generateBuildings();
+f_generateHouseholds();
+f_setCars();
+f_generateMVLVTransformers();
+f_generateHVMVTransformers();]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1680691521446</Id>
 					<Name><![CDATA[f_generateHouseholds]]></Name>
-					<X>-640</X><Y>780</Y>
+					<X>-640</X><Y>800</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1459,6 +1478,7 @@ for (Tuple row : rows) {
 //set location
 for (EA_Household h : pop_EA_Households){
 	h.setLatLon(h.ycoord, h.xcoord);
+	h.f_setOccupants();
 	/*
 	h.f_setOLHouseType();
 	h.f_findGisRegion(p_selectedNeighborhoodName);
@@ -1470,6 +1490,572 @@ for (EA_Household h : pop_EA_Households){
 	h.f_setDefaultAnnualEnergyDemand();
 	h.f_setLocationForHeatGrid();
 	*/
+}
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680715320170</Id>
+					<Name><![CDATA[f_selectGISRegion]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-660</X><Y>1020</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[clickx]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[clicky]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[if (gr_clickOnBuildingGroup.isVisible() == true){
+	gr_clickOnBuildingGroup.setVisible(false);
+}
+
+
+
+
+previousClickedBuilding = v_clickedBuilding;
+if( previousClickedBuilding != null){
+	previousClickedBuilding.gisRegion.setFillColor( v_clickedBuildingColor );
+}
+
+
+for ( Building b : pop_buildings ){
+	if( b.gisRegion.contains(clickx, clicky) ){
+		v_clickedBuilding = b;
+		v_clickedBuildingColor = b.gisRegion.getFillColor();
+		b.gisRegion.setFillColor( yellow );
+		
+		if(v_clickedBuilding.c_householdsInBuilding.size() > 1){
+			gr_nextHouseholdInBuilding.setVisible(true);
+		}
+		else {
+			gr_nextHouseholdInBuilding.setVisible(false);		
+		}
+		
+		if(v_clickedBuilding.c_householdsInBuilding.size() > 0){
+			v_householdInBuildingIndex = 0;
+			v_clickedHousehold = v_clickedBuilding.c_householdsInBuilding.get(v_householdInBuildingIndex);
+			
+			v_householdInBuildingNumber = v_householdInBuildingIndex + 1;
+		}
+		else {
+			v_householdInBuildingNumber = 0;
+		}
+		break;
+	}
+}
+
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680715320180</Id>
+					<Name><![CDATA[f_generateBuildings]]></Name>
+					<X>-640</X><Y>780</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Get trip tuples from this household ID from database
+List<Tuple> rows = selectFrom(residence_objects)
+	.list();
+	
+c_buildingIDs.addAll( selectValues(
+	"SELECT DISTINCT pandidenti FROM residence_objects;"));
+		
+for (Tuple row : rows) {
+
+	if (c_buildingIDs.contains(row.get( residence_objects.pandidenti ))){					
+				
+		EA_Building b = add_pop_EA_Buildings();
+		
+		b.pandidenti = row.get( residence_objects.pandidenti );
+		b.pandstatus = row.get( residence_objects.pandstatus );
+		b.xcoord = row.get( residence_objects.xcoord );
+		b.ycoord = row.get( residence_objects.ycoord );
+			
+		c_buildingIDs.removeIf(d -> d == b.pandidenti);
+	}
+}
+
+//set location
+for (EA_Building b : pop_EA_Buildings){
+	b.setLatLon(b.ycoord, b.xcoord);
+	//b.f_findGisRegion();
+	b.f_listHouseholdsInBuilding();
+	b.f_countEnergyLabels();
+}
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680715320183</Id>
+					<Name><![CDATA[f_countEnergyLabels]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-660</X><Y>1040</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[v_countHouseholdsLabelAPlusPlusPlus = count(pop_households, x->x.p_energyLabelOLValue == LabelAPlusPlusPlus);
+v_countHouseholdsLabelAPlusPlus = count(pop_households, x->x.p_energyLabelOLValue == LabelAPlusPlus);
+v_countHouseholdsLabelAPlus = count(pop_households, x->x.p_energyLabelOLValue == LabelAPlus);
+v_countHouseholdsLabelA = count(pop_households, x->x.p_energyLabelOLValue == LabelA);
+v_countHouseholdsLabelB = count(pop_households, x->x.p_energyLabelOLValue == LabelB);
+v_countHouseholdsLabelC = count(pop_households, x->x.p_energyLabelOLValue == LabelC);
+v_countHouseholdsLabelD = count(pop_households, x->x.p_energyLabelOLValue == LabelD);
+v_countHouseholdsLabelE = count(pop_households, x->x.p_energyLabelOLValue == LabelE);
+v_countHouseholdsLabelF = count(pop_households, x->x.p_energyLabelOLValue == LabelF);
+v_countHouseholdsLabelG = count(pop_households, x->x.p_energyLabelOLValue == LabelG);
+v_countHouseholdsLabelUnknown = count(pop_households, x->x.p_energyLabelOLValue == LabelUnknown);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680715320186</Id>
+					<Name><![CDATA[f_countHeatSupplyMethods]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-660</X><Y>1060</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[v_countHouseholdsNaturalGasBoiler = count(pop_households, x->x.p_householdHeatSupplyMethod == NaturalGasBoiler);
+v_countHouseholdsGreenGasBoiler = count(pop_households, x->x.p_householdHeatSupplyMethod == GreenGasBoiler);
+v_countHouseholdsElectricHeatPump = count(pop_households, x->x.p_householdHeatSupplyMethod == ElectricHeatPump);
+v_countHouseholdsHybridHeatPump = count(pop_households, x->x.p_householdHeatSupplyMethod == HybridHeatPump);
+v_countHouseholdsMTDistrictHeating = count(pop_households, x->x.p_householdHeatSupplyMethod == MTDistrictHeating);
+v_countHouseholdsLTDistrictHeating = count(pop_households, x->x.p_householdHeatSupplyMethod == LTDistrictHeating);
+v_countHouseholdsHTDistrictHeating = count(pop_households, x->x.p_householdHeatSupplyMethod == HTDistrictHeating);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680715679380</Id>
+					<Name><![CDATA[f_generateSampleCarPatterns]]></Name>
+					<X>-640</X><Y>760</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[for (int i = 0; i < p_sampleCarSize; i++){
+	add_pop_EA_SampleCarPatterns();
+}]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364543</Id>
+					<Name><![CDATA[f_defaultHeatingTypes]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-850</X><Y>870</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[p_totalConnections = p_aansl_aardgas + p_aansl_HTnet;
+
+int perc_naturalGasBoiler = roundToInt(p_aansl_aardgas / p_totalConnections * 100);
+int perc_HTDistrictHeating = roundToInt(p_aansl_HTnet / p_totalConnections * 100);
+
+sl_gasBurner.setValue(perc_naturalGasBoiler);
+sl_greenGasBoiler.setValue(0);
+sl_electricHeatPump.setValue(0);
+sl_hybridHeatPump.setValue(0);
+sl_districtHeating.setValue(0);
+sl_districtHeating.setValue(perc_HTDistrictHeating);
+
+
+ 
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364547</Id>
+					<Name><![CDATA[f_setCars]]></Name>
+					<X>-850</X><Y>790</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[//Number of cars in household
+for(EA_Household h : pop_EA_Households){
+	h.p_cars = roundToInt(h.p_adults * cd_carsPerAdult());
+}
+
+if( sum(pop_EA_Households, x->x.p_cars) < p_aantal_autos ){
+	while( sum(pop_EA_Households, x->x.p_cars) < p_aantal_autos ){
+		EA_Household h = randomWhere(pop_EA_Households, x->x.p_cars < x.p_adults);
+		h.p_cars++;
+	}
+}
+else if( sum(pop_EA_Households, x->x.p_cars) > p_aantal_autos ){
+	while( sum(pop_EA_Households, x->x.p_cars) > p_aantal_autos ){
+		EA_Household h = randomWhere(pop_EA_Households, x->x.p_cars > 0);
+		h.p_cars--;
+	}
+}
+
+//traceln(sum(pop_households, x->x.p_cars) + " p_cars");
+//traceln(p_aantal_autos + " aantal autos");]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364549</Id>
+					<Name><![CDATA[f_setElectricCars]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-850</X><Y>810</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[//Creating EVs
+if (sum(pop_households, x->x.v_EVs) < p_aantal_autos * v_EV_perc / 100){
+	while (sum(pop_households, x->x.v_EVs) < p_aantal_autos * v_EV_perc / 100){
+		Household h = randomWhere( pop_households, x->x.p_cars > x.v_EVs);
+		h.v_EVs++;
+		
+		h.add_pop_EA_ElectricVehicles();
+		//At on startup the EVs are connected to sample car patterns
+
+		if (h.pop_EA_ElectricVehicles.size() > 2){
+			traceln("ERROR - household " + h.getIndex() + " has more than max of two EVs");
+		}
+	}
+}
+//Removing EVs
+else if (sum(pop_households, x->x.v_EVs) > p_aantal_autos * v_EV_perc / 100){
+	while (sum(pop_households, x->x.v_EVs) > p_aantal_autos * v_EV_perc / 100){
+		Household h = randomWhere( pop_households, x->x.v_EVs > 0);
+		h.v_EVs--;
+		
+		EA_ElectricVehicle EVToRemove = h.pop_EA_ElectricVehicles.get(h.pop_EA_ElectricVehicles.size() - 1);
+		h.remove_pop_EA_ElectricVehicles(EVToRemove);
+	}
+}
+
+for (Household h : pop_households){
+	h.v_hasHomeCharger = false;
+	if (h.v_EVs > 0){
+		double rand = uniform(0,1);
+		if (rand < p_homeCharger_perc) {
+			h.v_hasHomeCharger = true;
+		}
+	}
+}
+
+//traceln(sum(pop_households, x->x.pop_EA_ElectricVehicles.size()) + " EVs");
+//traceln(count(pop_households, x->x.v_hasHomeCharger == true) + " Home chargers");]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364551</Id>
+					<Name><![CDATA[f_getHeatingPeakHour]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-850</X><Y>890</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[
+double v_heatDemandPeakHourValue = 0.0;
+double v_DHWPeakHourValue = 0.0;
+for (int i = 0; i < tf_G1AGasDemandProfile.getLength(); i++){
+	if (tf_G1AGasDemandProfile.get(i) > v_heatDemandPeakHourValue){
+		v_heatDemandPeakHourValue = tf_G1AGasDemandProfile.get(i);
+		v_heatDemandPeakHour = i;
+	}
+	if (tf_G1AGasDemandProfile.get(i) > v_DHWPeakHourValue){
+		v_DHWPeakHourValue = tf_DHWDemandFraction.get(i);
+		v_DHWPeakHour = i;
+	}
+}
+
+
+
+//traceln(v_DHWPeakHour + " DHW peak hour");]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364553</Id>
+					<Name><![CDATA[f_setHomeBatteries]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-850</X><Y>830</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[v_householdsWithHomeBatteries_perc]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[//Increase number of home batteries
+while (count(pop_households, x->x.v_hasHomeBattery == true) < pop_households.size() * v_householdsWithHomeBatteries_perc){	
+	if (count(pop_households, x->x.v_hasHomeBattery == false && x.v_hasPV == true) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == false && x.v_hasPV == true);
+		h.v_hasHomeBattery = true;
+	}
+	else if (count(pop_households, x->x.v_hasHomeBattery == false && x.buildingTypeOL != APPARTMENT && x.buildingTypeOL != HIGHRISE) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == false && x.buildingTypeOL != APPARTMENT && x.buildingTypeOL != HIGHRISE);
+		h.v_hasHomeBattery = true;
+	}
+	else {
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == false);
+		h.v_hasHomeBattery = true;
+	}
+}
+
+//Decrease number of home batteries
+while (count(pop_households, x->x.v_hasHomeBattery == true) > pop_households.size() * v_householdsWithHomeBatteries_perc){
+	if (count(pop_households, x->x.v_hasHomeBattery == true && x.buildingTypeOL == APPARTMENT && x.buildingTypeOL == HIGHRISE) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == true && x.buildingTypeOL == APPARTMENT && x.buildingTypeOL == HIGHRISE);
+		h.v_hasHomeBattery = false;
+	}
+	else if (count(pop_households, x->x.v_hasHomeBattery == true && x.v_hasPV == false) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == true && x.v_hasPV == false);
+		h.v_hasHomeBattery = false;
+	}
+	else { 
+		Household h = randomWhere(pop_households, x->x.v_hasHomeBattery == true);
+		h.v_hasHomeBattery = false;
+	}
+}
+
+//traceln(count(pop_households, x->x.v_hasHomeBattery == true) + " households with home battery");                       ]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364555</Id>
+					<Name><![CDATA[f_setInductionStove]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-849</X><Y>851</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[//Increase number of induction stoves
+while (count(pop_households, x->x.v_hasInductionStove == true) < pop_households.size() * sl_electricCooking.getValue() / 100){	
+	if (count(pop_households, x->x.v_hasInductionStove == false && !(x.p_householdHeatSupplyMethod == NaturalGasBoiler || x.p_householdHeatSupplyMethod == GreenGasBoiler)) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasInductionStove == false  && !(x.p_householdHeatSupplyMethod == NaturalGasBoiler || x.p_householdHeatSupplyMethod == GreenGasBoiler));
+		h.v_hasInductionStove = true;
+	}
+	else {
+		Household h = randomWhere(pop_households, x->x.v_hasInductionStove == false);
+		h.v_hasInductionStove = true;
+	}
+}
+
+//Decrease number of induction stoves
+while (count(pop_households, x->x.v_hasInductionStove == true) > pop_households.size() * sl_electricCooking.getValue() / 100 ){	
+	if (count(pop_households, x->x.v_hasInductionStove == true && (x.p_householdHeatSupplyMethod == NaturalGasBoiler || x.p_householdHeatSupplyMethod == GreenGasBoiler)) > 0){
+		Household h = randomWhere(pop_households, x->x.v_hasInductionStove == true  && (x.p_householdHeatSupplyMethod == NaturalGasBoiler || x.p_householdHeatSupplyMethod == GreenGasBoiler));
+		h.v_hasInductionStove = false;
+	}
+	else {
+		Household h = randomWhere(pop_households, x->x.v_hasInductionStove == true);
+		h.v_hasInductionStove = false;
+	}
+}
+
+//traceln(count(pop_households, x->x.v_hasInductionStove == true) + " households with induction stove");
+//traceln(count(pop_households, x->x.v_hasInductionStove == true && x.p_householdHeatSupplyMethod == NaturalGasBoiler) + " households with induction stove en aardgas");
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716364557</Id>
+					<Name><![CDATA[f_resetSettings]]></Name>
+					<X>-850</X><Y>740</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[v_costsUnknown = true;
+/*
+for(LVStation l : pop_lVStations){
+	l.oval.setFillColor(green);
+}
+
+if (gr_neighborhoodCosts.isVisible() == true){
+	gr_simulateCostsScreen.setVisible(true);
+}
+gr_simulateCostsScreenSmall.setVisible(true);
+*/]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716747403</Id>
+					<Name><![CDATA[f_generateMVLVTransformers]]></Name>
+					<X>-640</X><Y>820</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Get trip tuples from this household ID from database
+List<Tuple> rows = selectFrom(mvlv_transformers)
+	.where(mvlv_transformers.omschrijvi.eq("Netstation"))
+	.where(mvlv_transformers.currentsta.eq("functional"))
+	.where(mvlv_transformers.nominal_power.gt(0))
+	.list();
+
+for (Tuple row : rows) {
+	
+	EA_TransformerMVLV x = add_pop_EA_TransformersMVLV();
+		
+	x.id = row.get( mvlv_transformers.id);
+	x.ratedPower = row.get( mvlv_transformers.nominal_power);
+	x.currentStatus = row.get( mvlv_transformers.currentsta );
+	x.validFrom = row.get( mvlv_transformers.validfrom );
+	x.type = row.get( mvlv_transformers.omschrijvi );
+	x.xcoord = row.get( mvlv_transformers.xcoord );
+	x.ycoord = row.get( mvlv_transformers.ycoord );
+}
+
+//set location
+for (EA_TransformerMVLV x : pop_EA_TransformersMVLV){
+	x.setLatLon(x.ycoord, x.xcoord);
+}
+
+//connect HVMV-transformers to households
+f_connectHouseholdsToMVLVTransformers();
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680726137230</Id>
+					<Name><![CDATA[f_generateHVMVTransformers]]></Name>
+					<X>-640</X><Y>860</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Get trip tuples from this household ID from database
+List<Tuple> rows = selectFrom(hvmv_transformers)
+	.where(hvmv_transformers.type.eq("HSMS-station"))
+	.list();
+
+for (Tuple row : rows) {
+	
+	EA_TransformerHVMV x = add_pop_EA_TransformersHVMV();
+
+	x.id = row.get( hvmv_transformers.id);
+	x.station = row.get( hvmv_transformers.station);
+	x.plaats = row.get( hvmv_transformers.plaats );
+	x.netvlak = row.get( hvmv_transformers.netvlak );
+	x.type = row.get( hvmv_transformers.type );
+	x.voorzieningsgebied = row.get( hvmv_transformers.voorzieningsgebied );
+	x.totaleCapaciteitAfnameMva = row.get( hvmv_transformers.totale_capaciteit_afname_mva );
+	x.totaleCapaciteitInvoedingMva = row.get( hvmv_transformers.totale_capaciteit_invoeding_mva );
+	x.beschikbareCapaciteitAfnameHuidigMva = row.get( hvmv_transformers.beschikbare_capaciteit_afname_huidig_mva );
+	x.beschikbareCapaciteitAfname3JaarMva = row.get( hvmv_transformers.beschikbare_capaciteit_afname3_jaar_mva );
+	x.beschikbareCapaciteitAfname5JaarMva = row.get( hvmv_transformers.beschikbare_capaciteit_afname5_jaar_mva );
+	x.beschikbareCapaciteitAfname10JaarMva = row.get( hvmv_transformers.beschikbare_capaciteit_afname10_jaar_mva );
+	/*
+	x.beschikbareCapaciteitInvoedingHuidigMva = row.get( hvmv_transformers.beschikbareCapaciteitInvoedingHuidigMva );
+	x.beschikbareCapaciteitInvoeding3JaarMva = row.get( hvmv_transformers.beschikbareCapaciteitInvoeding3JaarMva );
+	x.beschikbareCapaciteitInvoeding5JaarMva = row.get( hvmv_transformers.beschikbareCapaciteitInvoeding5JaarMva );
+	x.beschikbareCapaciteitInvoeding10JaarMva = row.get( hvmv_transformers.beschikbareCapaciteitInvoeding10JaarMva );
+	x.investeringsplanningTijdAfname = row.get( hvmv_transformers.investeringsplanningTijdAfname );
+	x.investeringsplanningTijdInvoeding = row.get( hvmv_transformers.investeringsplanningTijdInvoeding );
+	x.investeringsplanningVermogenAfname = row.get( hvmv_transformers.investeringsplanningVermogenAfname );
+	x.netbeheerder = row.get( hvmv_transformers.netbeheerder );		
+	x.peildatum = row.get( hvmv_transformers.peildatum );
+	x.status = row.get( hvmv_transformers.status );
+	x.verwachtJaarVanOverbelastingAfnameMax2050 = row.get( hvmv_transformers.verwachtJaarVanOverbelastingAfnameMax2050 );
+	x.verwachtJaarVanOverbelastingInvoedingMax2050 = row.get( hvmv_transformers.verwachtJaarVanOverbelastingInvoedingMax2050 );
+	x.inbedrijfname = row.get( hvmv_transformers.inbedrijfname );
+	x.gISRegion = row.get( hvmv_transformers.gISRegion );
+*/	x.longitude = row.get( hvmv_transformers.longitude );
+	x.latitude = row.get( hvmv_transformers.latitude );		
+
+}
+
+//set location
+for (EA_TransformerHVMV x : pop_EA_TransformersHVMV){
+	x.setLatLon(x.latitude, x.longitude);
+}
+
+//connect HVMV-transformers to households
+
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680726158411</Id>
+					<Name><![CDATA[f_generateNeighborhoods]]></Name>
+					<X>-640</X><Y>880</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680726577033</Id>
+					<Name><![CDATA[f_connectHouseholdsToMVLVTransformers]]></Name>
+					<X>-630</X><Y>840</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[for (EA_Household h : pop_EA_Households){
+	EA_TransformerMVLV nearestLVStation = h.getNearestAgent(pop_EA_TransformersMVLV);
+	
+	//Because not all stations are equally well connected when just using getNearestAgent
+	if (nearestLVStation.c_connectedHouseholds.size() * p_maxPowerHousehold_kW * p_simultaneityFactor100Households > nearestLVStation.ratedPower){
+	//if ((nearestLVStation.c_connectedHouseholds.size() + 1) * p_kWConnectionCapacityPerHousehold > nearestLVStation.ratedPower){	
+		//traceln("Household " + h.getIndex() + " is redistributed from LV station " + nearestLVStation.getIndex());
+		
+		
+		List<EA_TransformerMVLV> listLVStations = new ArrayList();
+			
+		for (int i = 0; i < pop_EA_TransformersMVLV.size(); i++){
+			if(pop_EA_TransformersMVLV.get(i).type.equals("Netstation") && (pop_EA_TransformersMVLV.get(i).c_connectedHouseholds.size() + 1) * p_kWConnectionCapacityPerHousehold < pop_EA_TransformersMVLV.get(i).ratedPower){
+				listLVStations.add(pop_EA_TransformersMVLV.get(i));
+			}
+		}
+		nearestLVStation = h.getNearestAgent(listLVStations);
+		if (listLVStations == null){
+			traceln("no LV stations available for household " + h.getIndex());
+		}
+		
+		//traceln("Household " + h.getIndex() + " is redistributed to LV station " + nearestLVStation.getIndex());
+	}
+	h.p_connectedMVLVTransformer = nearestLVStation;
+	nearestLVStation.c_connectedHouseholds.add(h);
+}
+
+//For public version
+if (p_isPublicVersion == true){
+	for (EA_TransformerMVLV x : pop_EA_TransformersMVLV){
+		x.ratedPower = p_kWConnectionCapacityPerHousehold * x.c_connectedHouseholds.size();
+	}
 }
 
 ]]></Body>
@@ -1655,87 +2241,7 @@ for (EA_Household h : pop_EA_Households){
 					<ShowLabel>true</ShowLabel>
 					<ResourceReference>
 						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
-					</ResourceReference>
-					<SaveInSnapshot>false</SaveInSnapshot>
-					<LoadOnStartup>true</LoadOnStartup>
-					<SaveOnDispose>false</SaveOnDispose>
-				</ExcelFile>
-				<ExcelFile>
-					<Id>1680691759399</Id>
-					<Name><![CDATA[ex_residenceObjectsDatabase]]></Name>
-					<X>-650</X><Y>500</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ResourceReference>
-						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_residenceObjects.xlsx]]></ClassName>
-					</ResourceReference>
-					<SaveInSnapshot>false</SaveInSnapshot>
-					<LoadOnStartup>true</LoadOnStartup>
-					<SaveOnDispose>false</SaveOnDispose>
-				</ExcelFile>
-				<ExcelFile>
-					<Id>1680709942397</Id>
-					<Name><![CDATA[ex_buildingsDatabase]]></Name>
-					<X>-650</X><Y>530</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ResourceReference>
-						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
-					</ResourceReference>
-					<SaveInSnapshot>false</SaveInSnapshot>
-					<LoadOnStartup>true</LoadOnStartup>
-					<SaveOnDispose>false</SaveOnDispose>
-				</ExcelFile>
-				<ExcelFile>
-					<Id>1680710010307</Id>
-					<Name><![CDATA[ex_mslsTransformersDatabase]]></Name>
-					<X>-650</X><Y>560</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ResourceReference>
-						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
-					</ResourceReference>
-					<SaveInSnapshot>false</SaveInSnapshot>
-					<LoadOnStartup>true</LoadOnStartup>
-					<SaveOnDispose>false</SaveOnDispose>
-				</ExcelFile>
-				<ExcelFile>
-					<Id>1680710038586</Id>
-					<Name><![CDATA[ex_hsmsTransformersDatabase]]></Name>
-					<X>-650</X><Y>590</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ResourceReference>
-						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
-					</ResourceReference>
-					<SaveInSnapshot>false</SaveInSnapshot>
-					<LoadOnStartup>true</LoadOnStartup>
-					<SaveOnDispose>false</SaveOnDispose>
-				</ExcelFile>
-				<ExcelFile>
-					<Id>1680710062982</Id>
-					<Name><![CDATA[ex_hsmsTransformersDatabase1]]></Name>
-					<X>-650</X><Y>620</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ResourceReference>
-						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[_weeklyTripPattern.xlsx]]></ClassName>
+						<ClassName><![CDATA[_weekly_trip_pattern.xlsx]]></ClassName>
 					</ResourceReference>
 					<SaveInSnapshot>false</SaveInSnapshot>
 					<LoadOnStartup>true</LoadOnStartup>
@@ -2004,6 +2510,21 @@ for (EA_Household h : pop_EA_Households){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[p_inhabitants]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_cars]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_connectedMVLVTransformer]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_connectedHVMVTransformer]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_connectedEV1]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[p_connectedEV2]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
@@ -2393,7 +2914,7 @@ for (EA_Household h : pop_EA_Households){
 				</EmbeddedObject>
 				<EmbeddedObject>
 					<Id>1680690884859</Id>
-					<Name><![CDATA[pop_EA_TransformerMSLS]]></Name>
+					<Name><![CDATA[pop_EA_TransformersMVLV]]></Name>
 					<X>-650</X><Y>220</Y>
 					<Label><X>16</X><Y>-2</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -2402,12 +2923,12 @@ for (EA_Household h : pop_EA_Households){
 					<PresentationId>1680690886875</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[EA_TransformerMSLS]]></ClassName>
+						<ClassName><![CDATA[EA_TransformerMVLV]]></ClassName>
 					</ActiveObjectClass>
 					<GenericParameterSubstitute>
 						<GenericParameterSubstituteReference>
 							<PackageName><![CDATA[zero_energy_system]]></PackageName>
-							<ClassName><![CDATA[EA_TransformerMSLS]]></ClassName>
+							<ClassName><![CDATA[EA_TransformerMVLV]]></ClassName>
 							<ItemName><![CDATA[1680524817000]]></ItemName>
 						</GenericParameterSubstituteReference>
 					</GenericParameterSubstitute>
@@ -2476,7 +2997,7 @@ for (EA_Household h : pop_EA_Households){
 				</EmbeddedObject>
 				<EmbeddedObject>
 					<Id>1680690942436</Id>
-					<Name><![CDATA[pop_EA_TransformerHSMS]]></Name>
+					<Name><![CDATA[pop_EA_TransformersHVMV]]></Name>
 					<X>-650</X><Y>240</Y>
 					<Label><X>16</X><Y>-2</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -2485,12 +3006,12 @@ for (EA_Household h : pop_EA_Households){
 					<PresentationId>1680690944582</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[zero_energy_system]]></PackageName>
-						<ClassName><![CDATA[EA_TransformerHSMS]]></ClassName>
+						<ClassName><![CDATA[EA_TransformerHVMV]]></ClassName>
 					</ActiveObjectClass>
 					<GenericParameterSubstitute>
 						<GenericParameterSubstituteReference>
 							<PackageName><![CDATA[zero_energy_system]]></PackageName>
-							<ClassName><![CDATA[EA_TransformerHSMS]]></ClassName>
+							<ClassName><![CDATA[EA_TransformerHVMV]]></ClassName>
 							<ItemName><![CDATA[1680524742042]]></ItemName>
 						</GenericParameterSubstituteReference>
 					</GenericParameterSubstitute>
@@ -2577,7 +3098,7 @@ for (EA_Household h : pop_EA_Households){
 							<Name><![CDATA[gisRegionDatabase]]></Name>
 						</Parameter>
 						<Parameter>
-							<Name><![CDATA[longtitude]]></Name>
+							<Name><![CDATA[longitude]]></Name>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[latitude]]></Name>
@@ -6288,7 +6809,7 @@ rectangle_electricitySettings.setVisible(false);]]></OnClickCode>
 				</EmbeddedObjectPresentation>
 				<EmbeddedObjectPresentation>
 					<Id>1680690886875</Id>
-					<Name><![CDATA[pop_EA_TransformerMSLS_presentation]]></Name>
+					<Name><![CDATA[pop_EA_TransformersMVLV_presentation]]></Name>
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -6307,7 +6828,7 @@ rectangle_electricitySettings.setVisible(false);]]></OnClickCode>
 				</EmbeddedObjectPresentation>
 				<EmbeddedObjectPresentation>
 					<Id>1680690944582</Id>
-					<Name><![CDATA[pop_EA_TransformerHSMS_presentation]]></Name>
+					<Name><![CDATA[pop_EA_TransformersHVMV_presentation]]></Name>
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -9541,39 +10062,19 @@ new Thread( () -> {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*
-if (main.p_selectedNeighborhoodName == AfrikaanderbuurtMidden){
-	for ( GISRegion r : main.c_afrikaanderbuurtMiddenPanden ) {
-		f_connectGisRegion(r);
-		if (gisRegion != null){
-			break;
-		}
+					<Body><![CDATA[for ( GISRegion r : main.c_buildingGISRegions ) {
+	f_connectGisRegion(r);
+	if (gisRegion != null){
+		break;
 	}
 }
-if (main.p_selectedNeighborhoodName == SleeuwijkWest){
-	for ( GISRegion r : main.c_sleeuwijkWestPanden ) {
-		f_connectGisRegion(r);
-		if (gisRegion != null){
-			break;
-		}
-	}
-}
-if (main.p_selectedNeighborhoodName == DoornbosLinie){
-	for ( GISRegion r : main.c_doornbosLiniePanden ) {
-		f_connectGisRegion(r);
-		if (gisRegion != null){
-			break;
-		}
-	}
-}
-
 
 //If a household has no reason
 if (gisRegion == null ) {
 	traceln(this.getName() + " has no GIS area");
-	gisRegion = main.gisRegionUnknown;
+	//gisRegion = main.gisRegionUnknown;
 }
-*/]]></Body>
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -9589,11 +10090,9 @@ if (gisRegion == null ) {
 						<Name><![CDATA[r]]></Name>
 						<Type><![CDATA[GISRegion]]></Type>
 					</Parameter>
-					<Body><![CDATA[/*
-if ( r.contains( ycoord, xcoord)) {
+					<Body><![CDATA[if ( r.contains( ycoord, xcoord)) {
 	gisRegion = r;
-}
-*/]]></Body>
+}]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -10567,7 +11066,163 @@ else {
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680727037429</Id>
+					<Name><![CDATA[p_cars]]></Name>
+					<X>250</X><Y>200</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680727037427</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680727631280</Id>
+					<Name><![CDATA[p_connectedMVLVTransformer]]></Name>
+					<X>250</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[EA_TransformerMVLV]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680727631278</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680727647753</Id>
+					<Name><![CDATA[p_connectedHVMVTransformer]]></Name>
+					<X>250</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[EA_TransformerHVMV]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680727647751</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680727667310</Id>
+					<Name><![CDATA[p_connectedEV1]]></Name>
+					<X>250</X><Y>270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[EA_ElectricVehicle]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680727667308</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1680727694302</Id>
+					<Name><![CDATA[p_connectedEV2]]></Name>
+					<X>250</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[EA_ElectricVehicle]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1680727694300</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1680716250621</Id>
+					<Name><![CDATA[f_setOccupants]]></Name>
+					<X>20</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[OL_HouseholdOccupants Occupants = main.cd_occupants();
+if (Occupants == One_adult){
+	p_adults = 1;
+	}
+else if (Occupants == Two_adults){
+	p_adults = 2;
+}
+else if (Occupants == Two_adults_one_child){
+	p_adults = 2;
+	p_children = 1;
+}
+else if (Occupants == Two_adults_two_children){
+	p_adults = 2;
+	p_children = 2;
+}
+else if (Occupants == Two_adults_three_children){
+	p_adults = 2;
+	p_children = 3;
+}
+else if (Occupants == One_adult_one_child){
+	p_adults = 1;
+	p_children = 1;
+}
+else if (Occupants == One_adult_two_children){
+	p_adults = 1;
+	p_children = 2;
+}
+else if (Occupants == One_adult_three_children){
+	p_adults = 1;
+	p_children = 3;
+}
+else{
+traceln("Amount of occupants cant be determined");
+}
+
+p_inhabitants = p_adults + p_children;
+
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1680519780317</Id>
@@ -21333,7 +21988,7 @@ maxElectricityDemand_MW = maxElectricityDemand_MW;
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[EA_TransformerHSMS]]></Type>
+						<Type><![CDATA[EA_TransformerHVMV]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<ParameterEditor>
@@ -22564,7 +23219,7 @@ maxElectricityDemand_MW = maxElectricityDemand_MW;
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
 			<Id>1680524742047</Id>
-			<Name><![CDATA[EA_TransformerHSMS]]></Name>
+			<Name><![CDATA[EA_TransformerHVMV]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<StartupCode><![CDATA[/*
 if (type.equals("HSMS-station")){
@@ -23794,7 +24449,7 @@ maxReturnCapacity = -totaleCapaciteitInvoedingMva;
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1680524742292</Id>
-					<Name><![CDATA[longtitude]]></Name>
+					<Name><![CDATA[longitude]]></Name>
 					<X>50</X><Y>1400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -24979,7 +25634,7 @@ else {
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
 			<Id>1680524817005</Id>
-			<Name><![CDATA[EA_TransformerMSLS]]></Name>
+			<Name><![CDATA[EA_TransformerMVLV]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -25749,7 +26404,7 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
 			<ExternalConnection>
-				<Id>1680711623109</Id>
+				<Id>1680727552100</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
 				<Label><X>10</X><Y>0</Y></Label>
@@ -25762,7 +26417,49 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
 					<PackageName><![CDATA[zero_energy_system]]></PackageName>
-					<ClassName><![CDATA[_residenceObjects.xlsx]]></ClassName>
+					<ClassName><![CDATA[_residence_objects.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
+			<ExternalConnection>
+				<Id>1680727581759</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[_mvlv_transformers.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
+			<ExternalConnection>
+				<Id>1680727572220</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[_hvmv_transformers.xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
 				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
@@ -25776,6 +26473,24 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 				</TableReference>
 				<ConnectionIndex>0</ConnectionIndex>
 				<ExternalTableName><![CDATA["residence_objects"]]></ExternalTableName>
+				<AutoImport>true</AutoImport>
+			</TableImportSettings>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[mvlv_transformers]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>1</ConnectionIndex>
+				<ExternalTableName><![CDATA["mvlv_transformers"]]></ExternalTableName>
+				<AutoImport>true</AutoImport>
+			</TableImportSettings>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[zero_energy_system]]></PackageName>
+					<ClassName><![CDATA[hvmv_transformers]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>2</ConnectionIndex>
+				<ExternalTableName><![CDATA["hvmv_transformers"]]></ExternalTableName>
 				<AutoImport>true</AutoImport>
 			</TableImportSettings>
 		</ImportSettings>
@@ -25949,11 +26664,23 @@ while (v_netLoad_kW > ratedPower && count(c_connectedHouseholds, x->x.v_hasSmart
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[_weeklyTripPattern.xlsx]]></Path>
+			<Path><![CDATA[_residenceObjects.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[_residenceObjects.xlsx]]></Path>
+			<Path><![CDATA[_hvmv_transformers.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[_residence_objects.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[_weekly_trip_pattern.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[_mvlv_transformers.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
